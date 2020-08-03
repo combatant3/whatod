@@ -1,0 +1,24 @@
+<%
+if (typeof error === 'undefined') {
+    error = '';
+}
+
+status = (typeof status === 'undefined' ? '' : status);
+%>
+
+<h1>
+    Create User
+</h1>
+
+<% if (error) { %>
+    <p><%= error %></p>
+<% } %>
+
+<% if (status == 'success') { %>
+    <p>Successfully created a user.</p>
+<% } %>
+
+<form method="POST">
+    <input type="text" name="username" placeholder="Username" />
+    <button type="submit">Submit</button>
+</form>
