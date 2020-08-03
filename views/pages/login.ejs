@@ -5,22 +5,24 @@
 %>
 
 <div class="container">
-    <form method="POST">
-        <div class="row justify-content-md-center">
-            <div class="col-4">
-                <h1 class="text-center">Login</h1>
-                <div class="form-group">
-                    <% if (error) { %>
-                    <div class="alert alert-danger" role="alert">
-                        <%= error %>
+    <div class="columns is-centered">
+        <div class="column is-half">
+            <h1 class="title">Login</h1>
+            <div class="content">
+                <form method="POST">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" type="text" name="username" placeholder="Username" />
+                        </div>
                     </div>
-                    <% } %>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="username" class="form-control" placeholder="Username" />
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    <div class="field">
+                        <div class="control">
+                            <button type="submit" class="button">Login</button>
+                        </div>
+                    </div>
+                </form>
             </div>
+            <p>Don't have an account? <a href="/create-user">Click here</a> to make one.</p>
         </div>
-    </form>
+    </div>
 </div>

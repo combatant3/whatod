@@ -1,26 +1,52 @@
+<%
+if (typeof courses === 'undefined') {
+    courses = [];
+}
+%>
+
 <div class="container">
-    <div class="row">
-        <div class="col-12">
-            <h1>Dashboard</h1>
-            <h2>Your Courses</h2>
-        </div>
-        <div class="col-12">
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Course Name</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% for (let i = 0; i < courses.length; i++) { let course = courses[i]; %>
-                    <tr>
-                        <td><%= course.courseName %></td>
-                        <td></td>
-                    </tr>
-                    <% } %>
-                </tbody>
-            </table>
+    <div class="columns is-centered">
+        <div class="column is-half">
+            <h1 class="title">Dashboard</h1>
+            <div class="content">
+                <p>Welcome to your dashboard. This is pretty much the only content page in the app. You'll find your upcoming assignments and current courses here. Enjoy!</p>
+            </div>
+
+            <div class="content">
+                <h2 class="title">Upcoming Assignments</h2>
+                <p>Assignments are ordered by priority. The top assignment is the most urgent.</p>
+                <table class="table is-bordered">
+                    <thead>
+                        <th>Assignment</th>
+                        <th>Class</th>
+                        <th>Due Date</th>
+                        <th>Weight</th>
+                    </thead>
+                </table>
+                <a href="/assignment/create" class="button">Add Assignments</a>
+            </div>
+
+            <div class="content">
+                <h2 class="title">Your Courses</h2>
+                <table class="table is-bordered">
+                    <thead>
+                        <th>Course</th>
+                        <th>Actions</th>
+                    </thead>
+                    <tbody>
+                        <% for (let i = 0; i < courses.length; i++) { %>
+                        <tr>
+                            <td><%= courses[i].courseName %></td>
+                            <td>
+                                <a href="/course/edit/<%= courses[i].id %>">Edit</a>&nbsp;
+                                <a href="/course/delete/<%= courses[i].id %>">Delete</a>
+                            </td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+                <a href="/course/create" class="button">Add Course</a>
+            </div>
         </div>
     </div>
 </div>

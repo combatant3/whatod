@@ -22,7 +22,13 @@ module.exports = {
     },
 
     createGradeComponent: async function(gradeComponentData) {
-        return GradeComponent.create(gradeComponentData).fetch();
+        return await GradeComponent.create(gradeComponentData).fetch();
+    },
+
+    readComponentByCourse: async function(courseId) {
+        return await GradeComponent.find({
+            course: courseId
+        });
     }
 
 };

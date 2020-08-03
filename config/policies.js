@@ -10,13 +10,15 @@
 
 module.exports.policies = {
 
-  /***************************************************************************
-  *                                                                          *
-  * Default policy for all controllers and actions, unless overridden.       *
-  * (`true` allows public access)                                            *
-  *                                                                          *
-  ***************************************************************************/
+  '*': 'isLoggedIn',
 
-  // '*': true,
+  UserController: {
+    'createUser_GET': true,
+    'createUser_POST': true
+  },
+
+  IndexController: {
+    '*': true
+  }
 
 };

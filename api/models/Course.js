@@ -25,6 +25,18 @@ module.exports = {
         return await Course.find({
             user: userId
         });
+    },
+
+    readCourseById: async function(courseId) {
+        return await Course.findOne({
+            id: courseId
+        });
+    },
+
+    deleteCourse: async function(courseId) {
+        return await Course.destroyOne({
+            id: courseId
+        });
     }
 
 };

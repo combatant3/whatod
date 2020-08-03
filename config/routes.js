@@ -11,8 +11,9 @@
 module.exports.routes = {
 
   'get /': 'IndexController.homeRedirect',
-  'get /sign-in': 'IndexController.loginPage_GET',
-  'post /sign-in': 'IndexController.loginPage_POST',
+  'get /login': 'IndexController.loginPage_GET',
+  'post /login': 'IndexController.loginPage_POST',
+  'get /logout': 'IndexController.logout',
 
   // User Routes
   'get /dashboard': 'DashboardController.dashboardPage_GET',
@@ -23,6 +24,8 @@ module.exports.routes = {
   // Course Routes
   'get /course/create': 'CourseController.createCourse_GET',
   'post /course/create': 'CourseController.createCourse_POST',
+  'get /course/delete/:courseId': 'CourseController.deleteCourse',
+  'get /course/edit/:courseId': 'CourseController.editCourse_GET',
 
   // GradeComponent Routes
   'get /grade-component/create': 'GradeComponentController.createGradeComponent_GET',

@@ -6,19 +6,27 @@ if (typeof error === 'undefined') {
 status = (typeof status === 'undefined' ? '' : status);
 %>
 
-<h1>
-    Create User
-</h1>
-
-<% if (error) { %>
-    <p><%= error %></p>
-<% } %>
-
-<% if (status == 'success') { %>
-    <p>Successfully created a user.</p>
-<% } %>
-
-<form method="POST">
-    <input type="text" name="username" placeholder="Username" />
-    <button type="submit">Submit</button>
-</form>
+<div class="container">
+    <div class="columns is-centered">
+        <div class="column is-half">
+            <h1 class="title">Create Account</h1>
+            <div class="content">
+                <form method="POST">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" type="text" name="username" placeholder="Username" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <button type="submit" class="button">Create Account</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <p>
+                <a href="/login">Back to Login</a>
+            </p>
+        </div>
+    </div>
+</div>

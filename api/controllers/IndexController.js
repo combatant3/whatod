@@ -3,7 +3,11 @@ const User = require("../models/User");
 module.exports = {
 
     homeRedirect: async function(req, res) {
-        return res.redirect('/sign-in');
+        if (req.session.userId) {
+            return res.redirect('/dashboard');
+        }
+        
+        return res.redirect('/login');
     },
 
     loginPage_GET: async function(req, res) {
@@ -30,6 +34,14 @@ module.exports = {
         req.session.userId = user.id
 
         return res.redirect('/dashboard');
+    },
+
+    logout: async function(req, res) {
+        if (req.session.userId) {
+            delete req.session.userId;
+        }
+
+        res.redirect('/');
     }
 
 };

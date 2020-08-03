@@ -14,7 +14,7 @@ module.exports = {
             courses: courses
         };
 
-        return res.json(viewData);
+        return res.view('pages/dashboard', viewData);
     }
     
 };

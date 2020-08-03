@@ -4,15 +4,19 @@ module.exports = {
         let errors = [];
 
         if (!componentData.componentName) {
-            errors.push('Please enter a title for the grade component.');
+            errors.push('Please enter a category name for the grade component.');
         }
 
         if (!componentData.gradePercentage) {
             errors.push('Please enter a grade percentage for the grade component.');
         }
 
-        if (!componentData.course) {
-            errors.push('Please select a course to assign this grade component to.');
+        if (componentData.gradePercentage < 1) {
+            errors.push('The percentage for your grading categories must be greater than 0.')
+        }
+
+        if (componentData.gradePercentage > 100) {
+            errors.push('The percentage for your grading categories must not exceed 100.');
         }
 
         return errors;
