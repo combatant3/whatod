@@ -7,15 +7,24 @@ if (typeof assignments === 'undefined') {
     assignments = [];
 }
 %>
-
-<h1 class="title">Dashboard</h1>
 <div class="content">
-    <p>Welcome to your dashboard. This is pretty much the only content page in the app. You'll find your upcoming assignments and current courses here. Enjoy!</p>
+    <div class="notification is-warning is-light">
+        <p class="title has-text-centered">
+            <%= assignments[0].assignmentTitle %> is due <%= moment(assignments[0].dueDate).fromNow() %> for <%= assignments[0].courseName %>.
+        </p>
+    </div>
 </div>
 
 <div class="content">
-    <h2 class="title">Upcoming Assignments</h2>
-    <p>Assignments are ordered by priority. The top assignment is the most urgent.</p>
+    <div class="columns">
+        <div class="column is-two-thirds">
+            <h2 class="title">Upcoming Assignments</h2>
+            <p>Assignments are ordered by priority. The top assignment is the most urgent.</p>
+        </div>
+        <div class="column is-one-third has-text-right">
+            <a href="/assignment/create" class="button">Add Assignments</a>
+        </div>
+    </div>
     <table class="table is-bordered">
         <thead>
             <th>Assignment</th>
@@ -34,11 +43,17 @@ if (typeof assignments === 'undefined') {
             <% } %>
         </tbody>
     </table>
-    <a href="/assignment/create" class="button">Add Assignments</a>
 </div>
 
 <div class="content">
-    <h2 class="title">Your Courses</h2>
+    <div class="columns">
+        <div class="column is-two-thirds">
+            <h2 class="title">Your Courses</h2>
+        </div>
+        <div class="column is-one-third has-text-right">
+            <a href="/course/create" class="button">Add Course</a>
+        </div>
+    </div>
     <table class="table is-bordered">
         <thead>
             <th>Course</th>
@@ -56,5 +71,4 @@ if (typeof assignments === 'undefined') {
             <% } %>
         </tbody>
     </table>
-    <a href="/course/create" class="button">Add Course</a>
 </div>

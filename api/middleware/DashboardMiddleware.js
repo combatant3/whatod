@@ -38,6 +38,14 @@ module.exports = {
             }
 
             if (a.dailyImpact == b.dailyImpact) {
+                if (moment(a.dueDate).isBefore(moment(b.dueDate))) {
+                    return -1;
+                }
+
+                if (moment(b.dueDate).isBefore(moment(a.dueDate))) {
+                    return 1;
+                }
+                
                 return 0;
             }
         });
