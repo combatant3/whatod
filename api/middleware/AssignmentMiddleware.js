@@ -34,11 +34,16 @@ module.exports = {
             errors.push('Please select a grading component that these assignments belong to.');
         }
 
+        if (!assignmentData.course) {
+            errors.push('Please select a course that these assignments belong to.');
+        }
+
         return errors;
     },
 
     createBulkAssignments: async function(assignmentData, userId) {
         let gradeComponentId = parseInt(assignmentData.gradeComponent);
+        let courseId = parseInt(assignmentData.course)
 
         let assignments = [];
 
@@ -48,6 +53,7 @@ module.exports = {
                 assignmentTitle: assignment.assignmentTitle,
                 dueDate: assignment.dueDate,
                 gradeComponent: gradeComponentId,
+                course: courseId,
                 user: userId
             }));
         }

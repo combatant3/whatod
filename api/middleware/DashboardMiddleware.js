@@ -23,6 +23,7 @@ module.exports = {
             let dueDate = moment(assignments[i].dueDate);
             let timeUntilDue = dueDate.diff(moment(), 'days');
             let dailyImpact = weightPerAssignment / timeUntilDue;
+            if (timeUntilDue < 1) { dailyImpact = 50; }
             assignments[i].dailyImpact = dailyImpact.toFixed(3);
         }
 

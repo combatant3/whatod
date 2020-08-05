@@ -2,6 +2,8 @@ const CourseMiddleware = require("../middleware/CourseMiddleware");
 const Course = require("../models/Course");
 const GradeComponent = require("../models/GradeComponent");
 
+const moment = require('moment');
+
 module.exports = {
 
     createCourse_GET: async function(req, res) {
@@ -29,7 +31,9 @@ module.exports = {
     },
 
     editCourse_GET: async function(req, res) {
-        let viewData = {};
+        let viewData = {
+            moment: moment
+        };
 
         let courseId = req.param('courseId', '');
         let course = await Course.readCourseById(courseId);
@@ -44,6 +48,9 @@ module.exports = {
         if (req.session.errors && req.session.errors.length > 0) {
             viewData.errors = errors;
         }
+
+        let assignments = await Assignment.readAssignmentsByCourse(courseId);
+        viewData.assignments = assignments;
 
         viewData.formData = course;
 

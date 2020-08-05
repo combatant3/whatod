@@ -52,6 +52,27 @@ if (typeof formData.gradeComponents === 'undefined') {
                 <% } %>
             </table>
         </div>
+        <h2 class="title">Assignments</h2>
+        <div class="field">
+            <table class="table is-bordered">
+                <thead>
+                    <th>Title</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </thead>
+                <% for (let i = 0; i < assignments.length; i += 1) { %>
+                    <tbody>
+                        <tr>
+                            <td><%= assignments[i].assignmentTitle %></td>
+                            <td><%= moment(assignments[i].dueDate).format('MMMM Do, YYYY') %></td>
+                            <td><%= (assignments[i].status == 'todo' ? "To Do" : "Done") %></td>
+                            <td><a href="#" class="button">Edit</a></td>
+                        </tr>
+                    </tbody>
+                <% } %>
+            </table>
+        </div>
         <button type="submit" class="button is-primary">
             Save
         </button>

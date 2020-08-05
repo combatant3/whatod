@@ -27,7 +27,7 @@ module.exports = {
             return res.redirect('/assignment/create');
         }
 
-        let assignments = await AssignmentMiddleware.createBulkAssignments(assignmentData, req.session.userId);
+        await AssignmentMiddleware.createBulkAssignments(assignmentData, req.session.userId);
 
         return res.redirect('/dashboard');
     }

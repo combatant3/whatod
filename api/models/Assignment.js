@@ -22,6 +22,10 @@ module.exports = {
             model: 'user'
         },
 
+        course: {
+            model: 'course'
+        },
+
         status: {
             type: 'string',
             isIn: STATUSES,
@@ -37,6 +41,12 @@ module.exports = {
         return await Assignment.find({
             user: userId
         }).populate('gradeComponent');
+    },
+
+    readAssignmentsByCourse: async function(courseId) {
+        return await Assignment.find({
+            course: courseId
+        });
     }
 
 };
