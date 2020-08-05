@@ -41,9 +41,29 @@ module.exports = {
         let gradeComponents = await GradeComponent.readComponentsByCourse(course.id);
         course.gradeComponents = gradeComponents;
 
+        if (req.session.errors && req.session.errors.length > 0) {
+            viewData.errors = errors;
+        }
+
         viewData.formData = course;
 
         return res.view('pages/edit-course', viewData);
+    },
+
+    editCourse_POST: async function(req, res) {
+        let courseId = req.param('courseId', '');
+
+        let formData = req.allParams();
+
+        let errors = await CourseMiddleware.validateEditCourse(formData);
+        if (errors && errors.length > 0) {
+            req.session.errors = errors;
+            return res.redirect('/course/edit/' + courseId);
+        }
+
+        await CourseMiddleware.updateCourse(formData, courseId);
+
+        return res.redirect('/dashboard');
     },
 
     deleteCourse: async function(req, res) {

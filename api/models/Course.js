@@ -33,6 +33,12 @@ module.exports = {
         });
     },
 
+    updateCourse: async function(courseData, courseId) {
+        return await Course.update({
+            id: courseId
+        }).set(courseData);
+    },
+
     deleteCourse: async function(courseId) {
         return await Course.destroyOne({
             id: courseId

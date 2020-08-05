@@ -48,4 +48,20 @@ module.exports = {
         return course;
     },
 
+    validateEditCourse: async function(courseData) {
+        let errors = [];
+
+        if (!courseData.courseName) {
+            errors.push('Please enter a name for the course.');
+        }
+
+        return errors;
+    },
+
+    updateCourse: async function(courseData, courseId) {
+        let course = await Course.updateCourse(courseData, courseId)
+
+        return course;
+    }
+
 };

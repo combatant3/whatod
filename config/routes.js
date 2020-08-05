@@ -26,6 +26,7 @@ module.exports.routes = {
   'post /course/create': 'CourseController.createCourse_POST',
   'get /course/delete/:courseId': 'CourseController.deleteCourse',
   'get /course/edit/:courseId': 'CourseController.editCourse_GET',
+  'post /course/edit/:courseId': 'CourseController.editCourse_POST',
 
   // GradeComponent Routes
   'get /grade-component/create': 'GradeComponentController.createGradeComponent_GET',
