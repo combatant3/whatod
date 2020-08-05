@@ -25,10 +25,16 @@ module.exports = {
         return await GradeComponent.create(gradeComponentData).fetch();
     },
 
-    readComponentByCourse: async function(courseId) {
+    readComponentsByCourse: async function(courseId) {
         return await GradeComponent.find({
             course: courseId
         });
+    },
+
+    readComponentById: async function(componentId) {
+        return await GradeComponent.findOne({
+            id: componentId
+        }).populate('course').populate('assignments');
     }
 
 };

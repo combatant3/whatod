@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WhaToD</title>
+    <title>NextPls</title>
 
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -42,7 +42,7 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
-          <b>WhaToD</b>
+          <b>NextPls</b>
         </a>
 
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -79,7 +79,13 @@
       </div>
     </nav>
     <div class="page">
-      <%- body %>
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-three-quarters">
+            <%- body %>
+          </div>
+        </div>
+      </div>
     </div>
 
 
@@ -154,7 +160,9 @@
 			  crossorigin="anonymous"></script>
     <!--SCRIPTS-->
     <script src="/dependencies/sails.io.js"></script>
+    <script src="/js/create-assignment.js"></script>
     <script src="/js/create-course.js"></script>
+    <script src="/js/global.js"></script>
     <script src="/js/icheck.min.js"></script>
     <script src="/js/jquery.fs.selecter.min.js"></script>
     <script src="/js/jquery.fs.stepper.min.js"></script>

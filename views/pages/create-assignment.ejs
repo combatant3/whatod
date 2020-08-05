@@ -1,50 +1,87 @@
-<div class="container">
+<%
+if (typeof courses === 'undefined') {
+    courses = [];
+}
 
-    <div class="columns is-centered">
-        <div class="column is-half">
-            <h1 class="title">Add Assignment</h1>
-            <div class="content">
-                <form method="POST">
-                    <div class="field">
-                        <label class="label">Assignment Title</label>
-                        <div class="control">
-                            <input type="text" class="input" name="assignmentTitle" placeholder="Ex: Final Exam" />
-                        </div>
+if (typeof errors === 'undefined') {
+    errors = [];
+}
+%>
+
+<input id="courses" type="text" value="<%= JSON.stringify(courses) %>" hidden />
+
+<h1 class="title">Add Assignments</h1>
+<div class="content">
+    <% for (let i = 0; i < errors.length; i += 1) { %>
+    <div class="notification is-danger is-light">
+        <%= errors[i] %>
+    </div>
+    <% } %>
+</div>
+<div class="content">
+    <form method="POST" id="js-assignment-form">
+        <div class="columns">
+            <div class="field column is-half">
+                <label class="label">Course</label>
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select id="course-select">
+                            <option value="" selected disabled>Choose course...</option>
+                            <% for (let i = 0; i < courses.length; i++) { %>
+                            <option value="<%= courses[i].id %>"><%= courses[i].courseName %></option>
+                            <% } %>
+                        </select>
                     </div>
-                    <div class="field">
-                        <label class="label">Course</label>
-                        <div class="control">
-                            <div class="select">
-                                <select>
-                                    <option value="" selected disabled>Choose course...</option>
-                                    <option value="Example Course">Example Course</option>
-                                    <option value="Example Course">Example Course</option>
-                                    <option value="Example Course">Example Course</option>
-                                    <option value="Example Course">Example Course</option>
-                                </select>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="field column is-half">
+                <label class="label">Grade Component</label>
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select class id="grade-component-select" name="gradeComponent">
+                            <option value="" selected disabled>Choose grade category...</option>
+                        </select>
                     </div>
-                    <div class="field">
-                        <label class="label">Grade Component</label>
-                        <div class="control">
-                            <div class="select">
-                                <select>
-                                    <option value="" selected disabled>Choose grade category...</option>
-                                    <option value="Homework">Homework</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="button is-primary" type="submit">
-                        Add Assignment
-                    </button>
-                    <a href="/" class="button is-primary is-light">
-                        Cancel
-                    </a>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-
+        <div class="columns">
+            <div class="column is-three-quarters">
+                <label class="label">Assignment Title</label>
+            </div>
+            <div class="column is-one-quarter">
+                <label class="label">Due Date</label>
+            </div>
+        </div>
+        <div class="columns js-assignment-input">
+            <div class="column is-three-quarters">
+                <div class="field">
+                    <div class="control">
+                        <input type="text" class="input" id="js-assignment-title" name="assignments[0][assignmentTitle]" placeholder="Ex: Final Exam" />
+                    </div>
+                </div>
+            </div>
+            <div class="column is-one-quarter">
+                <div class="field">
+                    <div class="control">
+                        <input class="input" type="date" id="js-due-date" name="assignments[0][dueDate]" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <button class="button" type="button" id="js-add-assignment">
+                Add Assignment
+            </button>
+            <button class="button is-light" type="button" id="js-remove-assignment">
+                Remove Last Assignment
+            </button>
+        </div>
+        <button class="button is-primary" type="submit">
+            Finish
+        </button>
+        <a href="/" class="button is-primary is-light">
+            Cancel
+        </a>
+    </form>
 </div>

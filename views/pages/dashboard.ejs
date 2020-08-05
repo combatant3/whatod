@@ -2,51 +2,59 @@
 if (typeof courses === 'undefined') {
     courses = [];
 }
+
+if (typeof assignments === 'undefined') {
+    assignments = [];
+}
 %>
 
-<div class="container">
-    <div class="columns is-centered">
-        <div class="column is-half">
-            <h1 class="title">Dashboard</h1>
-            <div class="content">
-                <p>Welcome to your dashboard. This is pretty much the only content page in the app. You'll find your upcoming assignments and current courses here. Enjoy!</p>
-            </div>
+<h1 class="title">Dashboard</h1>
+<div class="content">
+    <p>Welcome to your dashboard. This is pretty much the only content page in the app. You'll find your upcoming assignments and current courses here. Enjoy!</p>
+</div>
 
-            <div class="content">
-                <h2 class="title">Upcoming Assignments</h2>
-                <p>Assignments are ordered by priority. The top assignment is the most urgent.</p>
-                <table class="table is-bordered">
-                    <thead>
-                        <th>Assignment</th>
-                        <th>Class</th>
-                        <th>Due Date</th>
-                        <th>Weight</th>
-                    </thead>
-                </table>
-                <a href="/assignment/create" class="button">Add Assignments</a>
-            </div>
+<div class="content">
+    <h2 class="title">Upcoming Assignments</h2>
+    <p>Assignments are ordered by priority. The top assignment is the most urgent.</p>
+    <table class="table is-bordered">
+        <thead>
+            <th>Assignment</th>
+            <th>Class</th>
+            <th>Due</th>
+            <th>Daily Impact</th>
+        </thead>
+        <tbody>
+            <% for (let i = 0; i < assignments.length; i += 1) { %>
+            <tr>
+                <td><%= assignments[i].assignmentTitle %></td>
+                <td><%= assignments[i].courseName %></td>
+                <td><%= moment(assignments[i].dueDate).fromNow() %></td>
+                <td><%= assignments[i].dailyImpact %></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <a href="/assignment/create" class="button">Add Assignments</a>
+</div>
 
-            <div class="content">
-                <h2 class="title">Your Courses</h2>
-                <table class="table is-bordered">
-                    <thead>
-                        <th>Course</th>
-                        <th>Actions</th>
-                    </thead>
-                    <tbody>
-                        <% for (let i = 0; i < courses.length; i++) { %>
-                        <tr>
-                            <td><%= courses[i].courseName %></td>
-                            <td>
-                                <a href="/course/edit/<%= courses[i].id %>">Edit</a>&nbsp;
-                                <a href="/course/delete/<%= courses[i].id %>">Delete</a>
-                            </td>
-                        </tr>
-                        <% } %>
-                    </tbody>
-                </table>
-                <a href="/course/create" class="button">Add Course</a>
-            </div>
-        </div>
-    </div>
+<div class="content">
+    <h2 class="title">Your Courses</h2>
+    <table class="table is-bordered">
+        <thead>
+            <th>Course</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            <% for (let i = 0; i < courses.length; i++) { %>
+            <tr>
+                <td><%= courses[i].courseName %></td>
+                <td>
+                    <a href="/course/edit/<%= courses[i].id %>">Edit</a>&nbsp;
+                    <a href="/course/delete/<%= courses[i].id %>">Delete</a>
+                </td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <a href="/course/create" class="button">Add Course</a>
 </div>

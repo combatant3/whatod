@@ -14,69 +14,63 @@ if (typeof formData.gradeComponents === 'undefined') {
 }
 %>
 
-<div class="container">
-    <div class="columns is-centered">
-        <div class="column is-half">
-            <h1 class="title">Add Course</h1>
-            <div class="content">
-                <% for (let i = 0; i < errors.length; i++) { %>
-                <div class="notification is-danger is-light">
-                    <%= errors[i] %>
-                </div>
-                <% } %>
-                <form method="POST">
-                    <div class="field">
-                        <div class="control">
-                            <input type="text" class="input" name="courseName" placeholder="Course Name" value="<%= formData.courseName %>" />
-                        </div>
-                    </div>
-                    <h2 class="title">Grade Components</h2>
-                    <div class="field">
-                        <table class="table is-bordered" id="component-table">
-                            <thead>
-                                <th>Category</th>
-                                <th>Weight (%)</th>
-                            </thead>
-                            <% if (formData.gradeComponents.length == 0) { %>
-                            <tbody class="grade-component-row">
-                                <td>
-                                    <input type="text" id="componentName" class="input" name="gradeComponents[0][componentName]" placeholder='"Homework"' />
-                                </td>
-                                <td>
-                                    <input type="number" id="gradePercentage" class="input" name="gradeComponents[0][gradePercentage]" placeholder='"40"' />
-                                </td>
-                            </tbody>
-                            <% } %>
-                            <% for (let i = 0; i < formData.gradeComponents.length; i++) {
-                                let component = formData.gradeComponents[i];
-                            %>
-                            <tbody class="grade-component-row">
-                                <td>
-                                    <input type="text" id="componentName" class="input" name="gradeComponents[<%= i %>][componentName]" placeholder='"Homework"' value="<%= component.componentName %>" />
-                                </td>
-                                <td>
-                                    <input type="number" id="gradePercentage" class="input" name="gradeComponents[<%= i %>][gradePercentage]" placeholder='"40"' value="<%= component.gradePercentage %>" />
-                                </td>
-                            </tbody>
-                            <% } %>
-                        </table>
-                    </div>
-                    <div class="content">
-                        <button class="button" type="button" id="addGradeComponent">
-                            Add Grade Component
-                        </button>
-                        <button class="button" type="button" id="remove-last-component">
-                            Remove Last Component
-                        </button>
-                    </div>
-                    <button type="submit" class="button is-primary">
-                        Create Course
-                    </button>
-                    <a href="/dashboard" class="button is-primary is-light">
-                        Cancel
-                    </a>
-                </form>
+<h1 class="title">Add Course</h1>
+<div class="content">
+    <% for (let i = 0; i < errors.length; i++) { %>
+    <div class="notification is-danger is-light">
+        <%= errors[i] %>
+    </div>
+    <% } %>
+    <form method="POST">
+        <div class="field">
+            <div class="control">
+                <input type="text" class="input" name="courseName" placeholder="Course Name" value="<%= formData.courseName %>" />
             </div>
         </div>
-    </div>
+        <h2 class="title">Grade Components</h2>
+        <div class="field">
+            <table class="table is-bordered" id="component-table">
+                <thead>
+                    <th>Category</th>
+                    <th>Weight (%)</th>
+                </thead>
+                <% if (formData.gradeComponents.length == 0) { %>
+                <tbody class="grade-component-row">
+                    <td>
+                        <input type="text" id="componentName" class="input" name="gradeComponents[0][componentName]" placeholder='"Homework"' />
+                    </td>
+                    <td>
+                        <input type="number" id="gradePercentage" class="input" name="gradeComponents[0][gradePercentage]" placeholder='"40"' />
+                    </td>
+                </tbody>
+                <% } %>
+                <% for (let i = 0; i < formData.gradeComponents.length; i++) {
+                    let component = formData.gradeComponents[i];
+                %>
+                <tbody class="grade-component-row">
+                    <td>
+                        <input type="text" id="componentName" class="input" name="gradeComponents[<%= i %>][componentName]" placeholder='"Homework"' value="<%= component.componentName %>" />
+                    </td>
+                    <td>
+                        <input type="number" id="gradePercentage" class="input" name="gradeComponents[<%= i %>][gradePercentage]" placeholder='"40"' value="<%= component.gradePercentage %>" />
+                    </td>
+                </tbody>
+                <% } %>
+            </table>
+        </div>
+        <div class="content">
+            <button class="button" type="button" id="addGradeComponent">
+                Add Grade Component
+            </button>
+            <button class="button" type="button" id="remove-last-component">
+                Remove Last Component
+            </button>
+        </div>
+        <button type="submit" class="button is-primary">
+            Create Course
+        </button>
+        <a href="/dashboard" class="button is-primary is-light">
+            Cancel
+        </a>
+    </form>
 </div>

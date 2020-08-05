@@ -38,7 +38,7 @@ module.exports = {
             return res.notFound();
         }
 
-        let gradeComponents = await GradeComponent.readComponentByCourse(course.id);
+        let gradeComponents = await GradeComponent.readComponentsByCourse(course.id);
         course.gradeComponents = gradeComponents;
 
         viewData.formData = course;

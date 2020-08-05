@@ -24,7 +24,7 @@ module.exports = {
     readCoursesByUser: async function(userId) {
         return await Course.find({
             user: userId
-        });
+        }).populate('gradeComponents');
     },
 
     readCourseById: async function(courseId) {

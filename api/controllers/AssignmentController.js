@@ -1,20 +1,35 @@
 const Assignment = require("../models/Assignment");
+const AssignmentMiddleware = require("../middleware/AssignmentMiddleware");
 
 module.exports = {
 
     createAssignment_GET: async function(req, res) {
-        return res.view('pages/create-assignment');
+        let userId = req.session.userId;
+        let courses = await Course.readCoursesByUser(userId);
+
+        let viewData = {
+            courses: courses
+        };
+
+        if (req.session.errors && req.session.errors.length > 0) {
+            viewData.errors = req.session.errors;
+        }
+
+        return res.view('pages/create-assignment', viewData);
     },
 
     createAssignment_POST: async function(req, res) {
-        let assignmentData = {
-            assignmentTitle: req.param('assignmentTitle', null),
-            gradeComponent: req.param('gradeComponent', null)
-        };
+        let assignmentData = req.allParams();
 
-        let assignment = await Assignment.createAssignment(assignmentData);
+        let errors = await AssignmentMiddleware.validateNewAssignments(assignmentData);
+        if (errors && errors.length > 0) {
+            req.session.errors = errors;
+            return res.redirect('/assignment/create');
+        }
 
-        return res.json(assignment);
+        let assignments = await AssignmentMiddleware.createBulkAssignments(assignmentData, req.session.userId);
+
+        return res.redirect('/dashboard');
     }
 
 };
