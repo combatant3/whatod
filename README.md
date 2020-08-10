@@ -1,12 +1,12 @@
 # README
 
 ## To Do
-- When a course is deleted, also delete all the grade components and assignments associated to it.
-- Add an edit page for assignments.
-- Add a recurring option for assignments.
-- Add a timestamp to the dueDate for assignments.
-- Add user password authentication.
-- Add an edit page for grade components.
+- [ ] When a course is deleted, also delete all the grade components and assignments associated to it.
+- [ ] Add an edit page for assignments.
+- [ ] Add a recurring option for assignments.
+- [ ] Add a timestamp to the dueDate for assignments.
+- [ ] Add user password authentication.
+- [ ] Add an edit page for grade components.
 
 ## About
 NextPls is a tool for students that automatically prioritizes their assignments for them, based on the relative weight an assignment has on their overall course grade and how soon the assignment is due.

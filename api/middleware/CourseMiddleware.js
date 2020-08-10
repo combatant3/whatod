@@ -21,8 +21,16 @@ module.exports = {
             percentageSum += parseInt(componentData.gradePercentage);
         }
 
-        if (percentageSum != 100) {
+        if (percentageSum !== 100) {
             errors.push('The grade percentages must sum to 100.');
+        }
+
+        if (!courseData.startDate) {
+            errors.push('Please select a start date for the course.');
+        }
+
+        if (!courseData.endDate) {
+            errors.push('Please select an end date for the course.');
         }
 
         return errors;
@@ -32,6 +40,8 @@ module.exports = {
         // Create the course
         let course = await Course.createCourse({
             courseName: courseData.courseName,
+            startDate: courseData.startDate,
+            endDate: courseData.endDate,
             user: userId
         });
 

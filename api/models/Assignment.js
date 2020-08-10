@@ -34,6 +34,7 @@ module.exports = {
     },
 
     createAssignment: async function(assignmentData) {
+        console.log('create assignment');
         return await Assignment.create(assignmentData).fetch();
     },
 

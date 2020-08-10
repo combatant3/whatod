@@ -14,6 +14,14 @@ module.exports = {
         gradeComponents: {
             collection: 'gradecomponent',
             via: 'course'
+        },
+
+        startDate: {
+            type: 'string'
+        },
+
+        endDate: {
+            type: 'string'
         }
     },
 

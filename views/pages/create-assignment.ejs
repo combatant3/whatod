@@ -46,27 +46,46 @@ if (typeof errors === 'undefined') {
             </div>
         </div>
         <div class="columns">
-            <div class="column is-three-quarters">
+            <div class="column is-6">
                 <label class="label">Assignment Title</label>
             </div>
-            <div class="column is-one-quarter">
+            <div class="column is-2">
+                <label class="label">Recurring?</label>
+            </div>
+            <div class="column is-4">
                 <label class="label">Due Date</label>
             </div>
         </div>
         <div class="columns js-assignment-input">
-            <div class="column is-three-quarters">
+            <div class="column is-6">
                 <div class="field">
                     <div class="control">
                         <input type="text" class="input" id="js-assignment-title" name="assignments[0][assignmentTitle]" placeholder="Ex: Final Exam" />
                     </div>
                 </div>
             </div>
-            <div class="column is-one-quarter">
+            <div class="column is-2 js-occurrences-column">
+                <label class="checkbox">
+                    <input type="checkbox" class="js-course-is-recurring" name="assignments[0][isRecurring]" />
+                </label>
+            </div>
+            <div class="column is-4 js-due-date-column">
                 <div class="field">
                     <div class="control">
                         <input class="input" type="date" id="js-due-date" name="assignments[0][dueDate]" />
                     </div>
                 </div>
+            </div>
+            <div class="column is-4 js-day-select-column hidden">
+                <% let days = ['S', 'M', 'T', 'W', 'T', 'F', 'S']; %>
+                <% for (let i = 0; i < days.length; i += 1) { %>
+                <label class="checkbox" style="padding-right: 10px;">
+                    <input type="checkbox" class="js-recurring-day" name="assignments[0][recurringDay_<%= i %>]" />
+                    <span style="display: block; text-align: center;">
+                        <%= days[i] %>
+                    </span>
+                </label>
+                <% } %>
             </div>
         </div>
         <div class="content">

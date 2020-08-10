@@ -8,11 +8,13 @@ if (typeof assignments === 'undefined') {
 }
 %>
 <div class="content">
+    <% if (assignments[0]) { %>
     <div class="notification is-warning is-light">
         <p class="title has-text-centered">
             <%= assignments[0].assignmentTitle %> is due <%= moment(assignments[0].dueDate).fromNow() %> for <%= assignments[0].courseName %>.
         </p>
     </div>
+    <% } %>
 </div>
 
 <div class="content">

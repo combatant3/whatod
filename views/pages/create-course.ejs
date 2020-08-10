@@ -6,6 +6,8 @@ if (typeof errors === 'undefined') {
 if (typeof formData === 'undefined') {
     formData = {
         courseName: '',
+        startDate: '',
+        endDate: ''
     };
 }
 
@@ -24,7 +26,26 @@ if (typeof formData.gradeComponents === 'undefined') {
     <form method="POST">
         <div class="field">
             <div class="control">
-                <input type="text" class="input" name="courseName" placeholder="Course Name" value="<%= formData.courseName %>" />
+                <label class="label">Course Name</label>
+                <input type="text" class="input" name="courseName" placeholder="Ex: Philosophy 101" value="<%= formData.courseName %>" />
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-half">
+                <div class="field">
+                    <div class="control">
+                        <label class="label">Start Date</label>
+                        <input type="date" class="input" name="startDate" value="<%= formData.startDate %>" />
+                    </div>
+                </div>
+            </div>
+            <div class="column is-half">
+                <div class="field">
+                    <div class="control">
+                        <label class="label">End Date</label>
+                        <input type="date" class="input" name="endDate" value="<%= formData.endDate %>" />
+                    </div>
+                </div>
             </div>
         </div>
         <h2 class="title">Grade Components</h2>
