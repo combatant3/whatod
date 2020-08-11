@@ -3,15 +3,19 @@ if (typeof courses === 'undefined') {
     courses = [];
 }
 
-if (typeof assignments === 'undefined') {
-    assignments = [];
+if (typeof upcomingAssignments === 'undefined') {
+    upcomingAssignments = [];
+}
+
+if (typeof pastAssignments === 'undefined') {
+    pastAssignments = [];
 }
 %>
 <div class="content">
-    <% if (assignments[0]) { %>
+    <% if (upcomingAssignments[0]) { %>
     <div class="notification is-warning is-light">
         <p class="title has-text-centered">
-            <%= assignments[0].assignmentTitle %> is due <%= moment(assignments[0].dueDate).fromNow() %> for <%= assignments[0].courseName %>.
+            <%= upcomingAssignments[0].assignmentTitle %> is due <%= moment(upcomingAssignments[0].dueDate).fromNow() %> for <%= upcomingAssignments[0].courseName %>.
         </p>
     </div>
     <% } %>
@@ -21,7 +25,6 @@ if (typeof assignments === 'undefined') {
     <div class="columns">
         <div class="column is-two-thirds">
             <h2 class="title">Upcoming Assignments</h2>
-            <p>Assignments are ordered by priority. The top assignment is the most urgent.</p>
         </div>
         <div class="column is-one-third has-text-right">
             <a href="/assignment/create" class="button">Add Assignments</a>
@@ -35,14 +38,34 @@ if (typeof assignments === 'undefined') {
             <th>Daily Impact</th>
         </thead>
         <tbody>
-            <% for (let i = 0; i < assignments.length; i += 1) { %>
+            <% for (let i = 0; i < upcomingAssignments.length; i += 1) { %>
             <tr>
-                <td><%= assignments[i].assignmentTitle %></td>
-                <td><%= assignments[i].courseName %></td>
-                <td><%= moment(assignments[i].dueDate).fromNow() %></td>
-                <td><%= assignments[i].dailyImpact %></td>
+                <td><%= upcomingAssignments[i].assignmentTitle %></td>
+                <td><%= upcomingAssignments[i].courseName %></td>
+                <td><%= moment(upcomingAssignments[i].dueDate).fromNow() %></td>
+                <td><%= upcomingAssignments[i].dailyImpact %></td>
             </tr>
             <% } %>
+        </tbody>
+    </table>
+</div>
+
+<div class="content">
+    <h2 class="title">Past Assignments</h2>
+    <table class="table is-bordered">
+        <thead>
+        <th>Assignment</th>
+        <th>Class</th>
+        <th>Due</th>
+        </thead>
+        <tbody>
+        <% for (let i = 0; i < pastAssignments.length; i += 1) { %>
+            <tr>
+                <td><%= pastAssignments[i].assignmentTitle %></td>
+                <td><%= pastAssignments[i].courseName %></td>
+                <td><%= moment(pastAssignments[i].dueDate).fromNow() %></td>
+            </tr>
+        <% } %>
         </tbody>
     </table>
 </div>

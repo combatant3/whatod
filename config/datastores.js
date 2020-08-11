@@ -53,8 +53,8 @@ module.exports.datastores = {
     // adapter: 'sails-mysql',
     // url: 'mysql://root:root@localhost:3306/whatod'
 
-    adapter: 'sails-postgresql',
-    url: 'postgresql://postgres:root@localhost:3306/nextpls'
+    adapter: 'sails-mysql',
+    url: 'mysql://root:root@localhost:3306/nextpls'
 
   },
 

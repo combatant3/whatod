@@ -68,6 +68,38 @@ module.exports = {
         return errors;
     },
 
+    createRecurringAssignments: async function(courseCreationParams) {
+        let { gradeComponentId, courseId, course, assignment, day, userId } = courseCreationParams;
+        let assignments = [];
+
+        // Find the first sunday after the course start date
+        let recurringDay = day;
+        let startDate = moment(course.startDate).isoWeekday();
+        let endDate = moment(course.endDate);
+
+        let assignmentDueDate = '';
+        if (startDate <= recurringDay) {
+            assignmentDueDate = moment(course.startDate).day(recurringDay);
+        } else {
+            assignmentDueDate = moment(course.startDate).add(1, 'w').day(recurringDay);
+        }
+
+        while (assignmentDueDate.isBefore(endDate) || assignmentDueDate.isSame(endDate)) {
+            // Create the new assignment
+            assignments.push(await Assignment.createAssignment({
+                assignmentTitle: assignment.assignmentTitle,
+                dueDate: moment(assignmentDueDate).format('YYYY-MM-DD'),
+                gradeComponent: gradeComponentId,
+                course: courseId,
+                user: userId
+            }));
+
+            assignmentDueDate.add(7, 'd');
+        }
+
+        return assignments;
+    },
+
     createBulkAssignments: async function(assignmentData, userId) {
         let gradeComponentId = parseInt(assignmentData.gradeComponent);
         let courseId = parseInt(assignmentData.course)
@@ -79,50 +111,60 @@ module.exports = {
             let assignment = assignmentData.assignments[i];
 
             let isRecurring = assignment.isRecurring === 'on';
+
+            let courseCreationParams = {
+                gradeComponentId: gradeComponentId,
+                course: course,
+                courseId: courseId,
+                assignment: assignment,
+                userId: userId
+            };
+
             if (isRecurring) {
                 if (assignment.recurringDay_0) {
-                    // Find the first sunday after the course start date
-                    let recurringDay = SUN;
-                    let startDate = moment(course.startDate).isoWeekday();
-                    let endDate = moment(course.endDate);
-
-                    let assignmentDueDate = '';
-                    if (startDate <= recurringDay) {
-                        assignmentDueDate = moment(course.startDate).day(recurringDay);
-                        console.log('start date', course.startDate);
-                    } else {
-                        assignmentDueDate = moment(course.startDate).add(1, 'w').day(recurringDay);
-                    }
-
-                    console.log('end date', endDate);
-                    while (assignmentDueDate.isBefore(endDate) || assignmentDueDate.isSame(endDate)) {
-                        // Create the new assignment
-                        assignments.push(await Assignment.createAssignment({
-                            assignmentTitle: assignment.assignmentTitle,
-                            dueDate: moment(assignmentDueDate).format('YYYY-MM-DD'),
-                            gradeComponent: gradeComponentId,
-                            course: courseId,
-                            user: userId
-                        }));
-
-                        console.log('due date', assignmentDueDate);
-                        assignmentDueDate.add(7, 'd');
-                    }
+                    courseCreationParams.day = SUN;
+                    assignments = assignments.concat(await this.createRecurringAssignments(courseCreationParams));
                 }
 
                 if (assignment.recurringDay_1) {
+                    courseCreationParams.day = MON;
+                    assignments = assignments.concat(await this.createRecurringAssignments(courseCreationParams));
+                }
 
+
+                if (assignment.recurringDay_2) {
+                    courseCreationParams.day = TUE;
+                    assignments = assignments.concat(await this.createRecurringAssignments(courseCreationParams));
+                }
+
+                if (assignment.recurringDay_3) {
+                    courseCreationParams.day = WED;
+                    assignments = assignments.concat(await this.createRecurringAssignments(courseCreationParams));
+                }
+
+                if (assignment.recurringDay_4) {
+                    courseCreationParams.day = THU;
+                    assignments = assignments.concat(await this.createRecurringAssignments(courseCreationParams));
+                }
+
+                if (assignment.recurringDay_5) {
+                    courseCreationParams.day = FRI;
+                    assignments = assignments.concat(await this.createRecurringAssignments(courseCreationParams));
+                }
+
+                if (assignment.recurringDay_6) {
+                    courseCreationParams.day = SAT;
+                    assignments = assignments.concat(await this.createRecurringAssignments(courseCreationParams));
                 }
             } else {
-
+                assignments.push(await Assignment.createAssignment({
+                    assignmentTitle: assignment.assignmentTitle,
+                    gradeComponent: gradeComponentId,
+                    dueDate: assignment.dueDate,
+                    user: userId,
+                    course: courseId
+                }));
             }
-            assignments.push(await Assignment.createAssignment({
-                assignmentTitle: assignment.assignmentTitle,
-                dueDate: assignment.dueDate,
-                gradeComponent: gradeComponentId,
-                course: courseId,
-                user: userId
-            }));
         }
 
         return assignments;
